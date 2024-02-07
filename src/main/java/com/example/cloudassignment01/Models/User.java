@@ -18,26 +18,32 @@ public class User{
     @GeneratedValue(generator = "uuid2")
     private UUID id;
 
-    @NotNull
-    @Email
     private String email;
 
 
-    @NotNull
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @NotNull
+
     @Size(min = 5)
     private String firstName;
 
-    @NotNull
+
     @Size(min = 5)
     private String lastName;
 
     private Date account_created;
 
     private Date account_updated;
+
+    public Date getAccount_created() {
+        return account_created;
+    }
+
+    public Date getAccount_updated() {
+        return account_updated;
+    }
 
     public UUID getId() {
         return id;
