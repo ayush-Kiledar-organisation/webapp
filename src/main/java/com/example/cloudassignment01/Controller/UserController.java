@@ -34,6 +34,7 @@ public class UserController {
     ErrorHandler errorHandler = new ErrorHandler();
 
     @PostMapping("/user/self")
+
     public ResponseEntity<?> createUser(@RequestBody(required = false) User user){
 
         if(!user.getEmail().matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}")){
@@ -44,12 +45,18 @@ public class UserController {
 
         }
 
+        if(user.getAccount_created() != null || user.getAccount_updated() != null){
+            errorHandler.setError("Account creation and updation time are auto generated");
+            return new ResponseEntity<>(errorHandler,HttpStatus.BAD_REQUEST);
+        }
+
         if(user.getLastName() == null || user.getFirstName() == null || user.getPassword() == null){
 
             errorHandler.setError("Firstname, Lastname and Password are required fields");
             return new ResponseEntity<>(errorHandler,HttpStatus.BAD_REQUEST);
 
         }
+
 
         if(user == null){
             errorHandler.setError("Request Body cannot be empty");
@@ -89,6 +96,11 @@ public class UserController {
         if(user.getId() != null || user.getEmail() != null){
             errorHandler.setError("ID and email cannot be updated");
 
+            return new ResponseEntity<>(errorHandler,HttpStatus.BAD_REQUEST);
+        }
+
+        if(user.getAccount_created() != null || user.getAccount_updated() != null){
+            errorHandler.setError("Account creation and updation time are auto generated");
             return new ResponseEntity<>(errorHandler,HttpStatus.BAD_REQUEST);
         }
 
