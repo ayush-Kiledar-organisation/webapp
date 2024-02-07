@@ -42,7 +42,9 @@ public class MySecurityConfig {
                 .cors(cors -> cors.disable())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint((unauthorizedHandler)))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/v1/user/self").permitAll()
+
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/v1/user/self","/healthz").permitAll()
+
                         .requestMatchers(HttpMethod.OPTIONS).permitAll()
                         .anyRequest().authenticated());
 
