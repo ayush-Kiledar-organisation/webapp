@@ -8,5 +8,6 @@
   <li>Various maven dependencies such as Spring security, Spring Boot Starter Web etc. have to be installed</li>
   <li>The application primarily contains 3 end points, each for getting, creating and updating user details</li>
   <li>The API's are proteted with basic auth authentication token.</li>
+  <li>It requires username and password</li>
 </ul>
 </ol>
