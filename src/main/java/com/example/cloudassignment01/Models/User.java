@@ -18,6 +18,7 @@ public class User{
     @GeneratedValue(generator = "uuid2")
     private UUID id;
 
+
     private String email;
 
 
@@ -30,12 +31,14 @@ public class User{
     private String firstName;
 
 
+
     @Size(min = 5)
     private String lastName;
 
     private Date account_created;
 
     private Date account_updated;
+
 
     public Date getAccount_created() {
         return account_created;
@@ -44,6 +47,7 @@ public class User{
     public Date getAccount_updated() {
         return account_updated;
     }
+
 
     public UUID getId() {
         return id;
