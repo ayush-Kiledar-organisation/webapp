@@ -34,6 +34,7 @@ public class UserController {
     ErrorHandler errorHandler = new ErrorHandler();
 
     @PostMapping("/user/self")
+
     public ResponseEntity<?> createUser(@RequestBody(required = false) User user){
 
         if(!user.getEmail().matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}")){
@@ -50,6 +51,7 @@ public class UserController {
             return new ResponseEntity<>(errorHandler,HttpStatus.BAD_REQUEST);
 
         }
+
 
         if(user == null){
             errorHandler.setError("Request Body cannot be empty");
