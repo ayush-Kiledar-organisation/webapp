@@ -45,10 +45,12 @@ public class UserController {
 
         }
 
+
         if(user.getAccount_created() != null || user.getAccount_updated() != null){
             errorHandler.setError("Account creation and updation time are auto generated");
             return new ResponseEntity<>(errorHandler,HttpStatus.BAD_REQUEST);
         }
+
 
         if(user.getLastName() == null || user.getFirstName() == null || user.getPassword() == null){
 
