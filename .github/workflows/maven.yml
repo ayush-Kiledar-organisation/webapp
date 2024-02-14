@@ -38,5 +38,5 @@ jobs:
     - name: Build completion
       run: echo "BUILD COMPLETED SUCCESSFULLY"
 
-    - name: Testing workflow failure again
+    - name: Testing the file failure
       run: exit 1
