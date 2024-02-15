@@ -9,5 +9,6 @@
   <li>The application primarily contains 3 end points, each for getting, creating and updating user details</li>
   <li>The API's are proteted with basic auth authentication token.</li>
   <li>It requires username and password</li>
+<li>Also added integration tests</li>
 </ul>
 </ol>
