@@ -80,6 +80,7 @@ const createUser = async (req, res) => {
     
     
         const user = await User.create(newuser);
+
         console.log(user);
 
         const obj = {
@@ -92,6 +93,7 @@ const createUser = async (req, res) => {
         }
     
         res.status(201).json(obj); 
+
 }
 
 const updateUser = async (req, res) => {
@@ -147,6 +149,7 @@ const updateUser = async (req, res) => {
         }
     
         res.status(200).json(obj);
+
 }
 
 module.exports = {
