@@ -15,7 +15,6 @@ const getUser = async (req, res) => {
         res.status(404).json({ error: "No User of this email found" });
     }
 
-
     const obj = {
         id: user.id,
         email: user.email,
@@ -26,7 +25,6 @@ const getUser = async (req, res) => {
     }
 
     res.status(200).json(obj);
-
 
 
 }
@@ -96,7 +94,6 @@ const createUser = async (req, res) => {
     
         res.status(201).json(obj); 
 
-
 }
 
 const updateUser = async (req, res) => {
@@ -141,7 +138,6 @@ const updateUser = async (req, res) => {
         const user = await User.update(newuser, {where: {email: emailid}});
         // console.log(user);
         const updated = await User.findOne({ where: { email: emailid } });
-
 
         const obj = {
             id: updated.id,
