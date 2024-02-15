@@ -42,7 +42,7 @@ jobs:
           sudo systemctl status mysql
 
       - name: create db
-        run: mysql -u ${{secrets.MYSQL_USERNAME}} -p"${{secrets.MYSQL_ROOT_PASSWORD}}" -e "CREATE DATABASE IF NOT EXISTS ${{ secrets.MYSQL_DATABASENAME }};" || exit 1 
+        run: mysql -u ${{secrets.MYSQL_USERNAME}} -p ${{secrets.MYSQL_ROOT_PASSWORD}} -e "CREATE DATABASE IF NOT EXISTS ${{ secrets.MYSQL_DATABASENAME }};" || exit 1 
 
       - name: Install dependencies
         run: npm install
