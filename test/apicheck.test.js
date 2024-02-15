@@ -108,4 +108,9 @@ describe("TEST 2: Update User and get the user",()=>{
     });
 });
 
+}
+catch(err){
+  console.log(err)
+}
+
 // test complete and succesful
