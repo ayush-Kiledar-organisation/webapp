@@ -37,3 +37,7 @@ jobs:
 
     - name: Build completion
       run: echo "BUILD COMPLETED SUCCESSFULLY"
+
+
+    - name: Testing the file failure again here
+      run: exit 1
