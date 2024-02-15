@@ -15,7 +15,18 @@ const getUser = async (req, res) => {
         res.status(404).json({ error: "No User of this email found" });
     }
 
-    res.status(200).json(user);
+
+    const obj = {
+        id: user.id,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        created_at: user.account_created,
+        updated_at: user.account_updated
+    }
+
+    res.status(200).json(obj);
+
 
 
 }
@@ -72,11 +83,20 @@ const createUser = async (req, res) => {
     
         const user = await User.create(newuser);
 
-        delete user.toJSON.password
-        // delete user["createdAt"]
-        // delete user["updatedAt"]
+        console.log(user);
+
+        const obj = {
+            id: user.id,
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            created_at: user.account_created,
+            updated_at: user.account_updated
+        }
     
-        res.status(201).json(user); 
+        res.status(201).json(obj); 
+
+
 }
 
 const updateUser = async (req, res) => {
@@ -121,8 +141,19 @@ const updateUser = async (req, res) => {
         const user = await User.update(newuser, {where: {email: emailid}});
         // console.log(user);
         const updated = await User.findOne({ where: { email: emailid } });
+
+
+        const obj = {
+            id: updated.id,
+            email: updated.email,
+            firstName: updated.firstName,
+            lastName: updated.lastName,
+            created_at: updated.account_created,
+            updated_at: updated.account_updated
+        }
     
-        res.status(204).json(updated);
+        res.status(200).json(obj);
+
 }
 
 module.exports = {
