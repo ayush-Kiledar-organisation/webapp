@@ -7,13 +7,13 @@ const credentials = new Sequelize(
 
 
     'cloud_assignment_db',
-    'root' 
+
+    'root', 
     'root',{
     host: '127.0.0.1',
 
     dialect: 'mysql',
     logging: false
-
     });
 
 const Schema = credentials.define('user',User);
