@@ -11,7 +11,7 @@ console.log(email);
 
 beforeAll(async()=>{
   try {
-      await sequelize.sync({});
+      await credentials.sync({});
       console.log('Db connected');
     } catch (error) {
       console.log('Error:', error);
