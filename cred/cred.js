@@ -5,10 +5,12 @@ const User = require('../model/User');
 
 const credentials = new Sequelize(
 
-    process.env.MYSQL_DATABASENAME,
-    process.env.MYSQL_USERNAME, 
-    process.env.MYSQL_ROOT_PASSWORD,{
-    host: process.env.HOST,
+
+    'cloud_assignment_db',
+    'root' 
+    'root',{
+    host: '127.0.0.1',
+
     dialect: 'mysql',
     logging: false
 
