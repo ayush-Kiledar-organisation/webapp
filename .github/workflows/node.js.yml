@@ -40,12 +40,6 @@ jobs:
           mysql -u${{ secrets.MYSQL_USERNAME}} -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "USE ${{secrets.MYSQL_DATABASENAME}};" || exit 1
 
       - name: Run The Test
-        env:
-          HOST: 127.0.0.1
-          HOSTNAME: root
-          PASSWORD: root
-          DATABASE: ${{secrets.MYSQL_DATABASENAME}}
-          PORT: 3000
         run: |
           npm test
 
