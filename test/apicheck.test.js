@@ -20,7 +20,6 @@ beforeAll(async()=>{
 
 // test for create and get user
 
-try{
   describe("TEST 1: Create user and get the user",()=>{
     test("creating an account", async()=>{
       const user_obj =
@@ -77,8 +76,5 @@ afterAll(async() => {
     console.error('Error closing:', error);
   }
 });
-}
 
-catch(err){
-  console.log(err);
-}
+

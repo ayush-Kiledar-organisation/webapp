@@ -37,12 +37,12 @@ const createUser = async (req, res) => {
         return;
     }
 
-        // const existing = await User.findOne({ where: { email: req.body.email } });
+        const existing = await User.findOne({ where: { email: req.body.email } });
 
-        // if(existing){
-        //     res.status(409).json({ error: "Email already taken" });
-        //     return;
-        // }
+        if(existing){
+            res.status(409).json({ error: "Email already taken" });
+            return;
+        }
 
         if(!req.body.password || req.body.password == ""){
             res.status(400).json({ error: "Password field shouldn't be empty" });
