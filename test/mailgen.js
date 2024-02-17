@@ -10,7 +10,9 @@ const  generateMail = ()=> {
 
     // Add a domain name
     email += first;
+
     email += "abcnewnewemail";
+
     email += end;
     email += '@gmail.com';
     console.log(email)
