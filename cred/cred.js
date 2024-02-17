@@ -4,12 +4,13 @@ const User = require('../model/User');
 
 
 const credentials = new Sequelize(
-    process.env.DATABASE,
-    process.env.HOSTNAME,
-    process.env.PASSWORD,{  
+
+    process.env.MYSQL_DATABASENAME,
+    process.env.MYSQL_USERNAME, 
+    process.env.MYSQL_ROOT_PASSWORD,{
     host: process.env.HOST,
     dialect: 'mysql',
-    logging: false,
+    logging: false
 
     });
 
