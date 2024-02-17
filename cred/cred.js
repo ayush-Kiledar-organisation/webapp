@@ -8,7 +8,7 @@ const credentials = new Sequelize(
     process.env.MYSQL_DATABASENAME,
     process.env.MYSQL_USERNAME, 
     process.env.MYSQL_ROOT_PASSWORD,{
-    host: 'localhost',
+    host: process.env.HOST,
     dialect: 'mysql',
     logging: false
 
