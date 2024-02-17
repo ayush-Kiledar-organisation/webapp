@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "test": "jest ./test/apicheck.test.js",
+
+    "test": "jest --forceExit ./test/apicheck.test.js",
+
     "start": "nodemon index.js",
     "helthz": "nodemon health.js"
   },

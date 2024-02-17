@@ -1,50 +1,62 @@
-name: DB and Integration Tests
+name: build.js
 
 on:
-
   push:
-    branches: [ "main" ]
+    branches: [main]
   pull_request:
-    branches: [ "main" ]
-
+    branches: [main]
   pull_request_target:
-    branches:
-      - main
+    branches: -main
+  workflow_dispatch:
 
 jobs:
   build:
-    name: build_job
-
+    name: Build
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [16]
-
     steps:
-      - name: Check out code
-        uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: setup Node.js
-        uses: actions/setup-node@v3
-
-      - name: Create env file,
-        run: |
-          echo "MYSQL_HOSTNAME=${{secrets.MYSQL_HOSTNAME}}" >> .env
-          echo "MYSQL_DATABASENAME=${{secrets.MYSQL_DATABASENAME}}" >> .env
-          echo "MYSQL_USERNAME=${{secrets.MYSQL_USERNAME}}" >> .env
-          echo "MYSQL_ROOT_PASSWORD=${{secrets.MYSQL_ROOT_PASSWORD}}" >> .env
-          cat .env
-
-      - name: Install MySQL
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y mysql-server
-          sudo systemctl start mysql
-          sudo systemctl status mysql 
+      - name: Set up Node.js
+        uses: actions/checkout@v3
+        with:
+          node-version: "v21.2.0"
 
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests
-        run: npm test
+      - name: Install mysql
+        run: |
+          sudo apt-get update
+          sudo apt-get install mysql-server
+          sudo apt-get install mysql-client
+          sudo systemctl start mysql
+          sudo systemctl status mysql
+
+      - name: Create the db and apply the same
+        run: |
+          mysql -u${{secrets.HOSTNAME}} -p${{secrets.PASSWORD}} -e "CREATE DATABASE IF NOT EXISTS ${{secrets.DATABASE}};"
+          mysql -u${{ secrets.HOSTNAME}} -p${{secrets.PASSWORD}} -e "USE ${{secrets.DATABASE}};" || exit 1
+
+      - name: Run The Test
+        env:
+          HOST: 127.0.0.1
+          HOSTNAME: root
+          PASSWORD: root
+          DATABASE: ${{secrets.DATABASE}}
+          PORT: 3000
+        run: |
+          npm test
+
+      - name: Delete the db
+        run: |
+          mysql -u${{secrets.HOSTNAME}} -p${{secrets.PASSWORD}} -e "DROP DATABASE ${{secrets.DATABASE}}"
+
+      - name: test for failure(optional)
+        if: failure()
+        run: exit 1
+
+      - name: All tests completed
+        if: ${{success()}}
+        run: echo "Test succesfull."
