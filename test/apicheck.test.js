@@ -31,7 +31,7 @@ beforeAll(async()=>{
        };
        const resCreateUser = await request(app).post("/v1/user/self").send(user_obj);
   
-       await expect(resCreateUser.statusCode).toBe(201);
+       await expect(resCreateUser.statusCode).toBe(506);
        console.log("Create status=> ",resCreateUser.statusCode)
   
        const token = Buffer.from(`${user_obj.email}:${user_obj.password}`).toString('base64');
