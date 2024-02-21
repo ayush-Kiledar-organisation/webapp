@@ -24,8 +24,8 @@ sudo yum install unzip
 
 sudo cp -r  webapp.zip /opt/csye6225
 
-sudo chown -R csye6225:csye6225 /opt/csye6225/webapp
-sudo chmod -R 750  /opt/csye6225/webapp
+# sudo chown -R csye6225:csye6225 /opt/csye6225/webapp
+# sudo chmod -R 750  /opt/csye6225/webapp
 
 sudo -u csye6225 bash
 
