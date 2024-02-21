@@ -31,7 +31,3 @@ sudo cp -r  webapp.zip /opt/csye6225
 
 cd /opt/csye6225
 sudo unzip webapp.zip
-
-cd webapp
-sudo npm install --build-from-source
-
