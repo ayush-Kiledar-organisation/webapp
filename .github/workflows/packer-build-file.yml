@@ -1,0 +1,54 @@
+name: Packer Build on PR Merge
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  packer_build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Zip Web App
+      run: zip -r webapp.zip ../webapp
+
+
+    - name: Set up Packer
+      run: |
+        wget https://releases.hashicorp.com/packer/1.8.3/packer_1.8.3_linux_amd64.zip
+        unzip packer_1.8.3_linux_amd64.zip
+        chmod +x packer
+        sudo mv packer /usr/local/bin/
+      shell: bash
+
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v2'
+
+    - name: 'Use gcloud CLI'
+      run: 'gcloud info'
+
+    - name: Install Packer
+      run: |
+        wget https://releases.hashicorp.com/packer/1.7.2/packer_1.7.2_linux_amd64.zip
+        unzip packer_1.7.2_linux_amd64.zip
+        chmod +x packer
+        mv packer /usr/local/bin
+      shell: bash
+
+    - name: Run packer init
+      run: packer init packer-file.json.pkr.hcl
+    
+    - name: Run `packer Build`
+      id: packer_build
+      run: |
+        echo "Running packer build"
+        packer build packer-file.json.pkr.hcl
