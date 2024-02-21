@@ -1,0 +1,19 @@
+{
+    "builders": [{
+      "type": "googlecompute",
+      "project_id": "dev-assignment4",
+      "source_image_family": "centos-stream-8",
+      "image_name": "assignment4-image",
+      "zone": "us-central1-a",
+      "ssh_username": "root",
+      "use_internal_ip": false
+    }],
+    "provisioners": [
+        {
+            "type":"shell",
+            "source": "script.sh",
+            "destination": "/tmp/script.sh"
+        }
+    ]
+  }
+  
