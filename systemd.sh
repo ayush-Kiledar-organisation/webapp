@@ -14,7 +14,7 @@ ls -la /opt/csye6225
 
 sudo -u csye6225 bash
 
-cd /opt/csye6225
+cd /opt/csye6225/webapp-fork
 sudo systemctl start csye6225
 sudo systemctl restart csye6225
 sudo systemctl status csye6225
