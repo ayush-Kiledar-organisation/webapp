@@ -1,15 +1,19 @@
 #!/bin/bash
 
 sudo yum update
+
+echo "Installing npm..."
+sudo yum install nodejs npm -y
+
+sudo yum update
+
 sudo yum -y install @mysql
 sudo systemctl start mysqld.service
 sudo systemctl enable mysqld
 
-echo "Installing npm..."
-sudo yum -y install epel-release
-sudo yum -y install nodejs npm
+sudo yum update
 
-sudo yum install -y unzip
+sudo yum install unzip -y
 
 echo "MySQL and npm installation completed."
 
@@ -28,6 +32,6 @@ sudo -u csye6225 bash
 cd /opt/csye6225
 sudo unzip webapp.zip
 
-cd webapp
-sudo npm install
+# cd webapp
+# sudo npm install
 

@@ -28,4 +28,10 @@ build {
     script  = "script.sh"
   }
 
+    provisioner "shell" {
+    scripts = [
+      "systemd.sh",
+    ]
+  }
+
 }
