@@ -1,10 +1,11 @@
 {
+  "name": "assignment-01",
+  "version": "1.0.0",
+  "main": "server.js",
   "scripts": {
 
     "test": "jest --forceExit ./test/apicheck.test.js",
-
-    "start": "nodemon index.js",
-    "helthz": "nodemon health.js"
+    "start": "nodemon index.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -16,5 +17,9 @@
     "pg": "^8.11.3",
     "sequelize": "^6.37.0",
     "supertest": "^6.3.4"
+  },
+  "description": "",
+  "devDependencies": {
+    "node-pre-gyp": "0.12.0"
   }
 }
