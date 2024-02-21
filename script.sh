@@ -2,8 +2,8 @@
 
 sudo yum update
 sudo yum -y install @mysql
-sudo systemctl -y start mysqld.service
-sudo systemctl -y enable mysqld
+sudo systemctl start mysqld.service
+sudo systemctl enable mysqld
 
 echo "Installing npm..."
 sudo yum -y install epel-release
@@ -13,7 +13,7 @@ sudo yum install -y unzip
 
 echo "MySQL and npm installation completed."
 
-
+sudo groupadd csye6225
 sudo useradd -g csye6225 -d /opt/csye6225 -s /usr/sbin/nologin csye6225
 
 sudo yum install unzip
