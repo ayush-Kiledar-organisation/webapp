@@ -22,16 +22,16 @@ sudo useradd -g csye6225 -d /opt/csye6225 -s /usr/sbin/nologin csye6225
 
 sudo yum install unzip
 
+sudo -u csye6225 bash
+
 sudo cp -r  webapp.zip /opt/csye6225
 
 # sudo chown -R csye6225:csye6225 /opt/csye6225/webapp
 # sudo chmod -R 750  /opt/csye6225/webapp
 
-sudo -u csye6225 bash
-
 cd /opt/csye6225
 sudo unzip webapp.zip
 
-# cd webapp
-# sudo npm install
+cd webapp
+sudo npm install
 
