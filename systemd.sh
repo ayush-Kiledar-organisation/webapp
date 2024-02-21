@@ -6,8 +6,8 @@ echo "display permissions of user directory"
 ls -la /opt/csye6225
 
 echo "change permissions of webapp"
-sudo chown -R csye6225:csye6225 /opt/csye6225/webapp
-sudo chmod -R 750  /opt/csye6225/webapp
+sudo chown -R csye6225:csye6225 /opt/csye6225/webapp-fork
+sudo chmod -R 750  /opt/csye6225/webapp-fork
 
 echo "display permissions of user directory"
 ls -la /opt/csye6225
@@ -15,7 +15,7 @@ ls -la /opt/csye6225
 sudo -u csye6225 bash
 
 cd 
-sudo systemctl start webapp
-sudo systemctl restart webapp
-sudo systemctl status webapp
-sudo systemctl enable webapp
+sudo systemctl start csye6225
+sudo systemctl restart csye6225
+sudo systemctl status csye6225
+sudo systemctl enable csye6225
