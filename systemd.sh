@@ -31,4 +31,5 @@ sudo chown csye6225:csye6225 /etc/systemd/system/csye6225.service
 sudo systemctl daemon-reload
 sudo systemctl start csye6225
 sudo systemctl enable csye6225
-
+sudo systemctl disable csye6225
+sudo systemctl enable csye6225
