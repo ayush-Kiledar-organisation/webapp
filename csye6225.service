@@ -1,19 +1,14 @@
 [Unit]
-Description=CSYE 6225 App
-ConditionPathExists=/opt/application.properties
+Description=systemd
+Documentation=https://example.com
 After=network.target
 
 [Service]
+WorkingDirectory=/opt/csye6225/webapp
 Type=simple
 User=csye6225
-Group=csye6225
-WorkingDirectory=/opt/csye6225/webapp-fork
-ExecStart=/opt/csye6225/webapp-fork/server.js
+ExecStart=/usr/bin/node /opt/csye6225/webapp/server.js
 Restart=always
-RestartSec=3
-StandardOutput=syslog
-StandardError=syslog
-SyslogIdentifier=csye6225
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=cloud-init.target

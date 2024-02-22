@@ -3,13 +3,16 @@
 sudo yum update
 
 echo "Installing npm..."
-sudo yum install nodejs npm -y
+sudo yum install -y nodejs gcc-c++ make
+sudo dnf module -y reset nodejs
+sudo dnf module -y enable nodejs:16
 
 sudo yum update
 
 sudo yum -y install @mysql
 sudo systemctl start mysqld.service
 sudo systemctl enable mysqld
+mysql -u root -p'' -e "CREATE DATABASE cloud_assignment_db;"
 
 sudo yum update
 
@@ -21,6 +24,8 @@ sudo groupadd csye6225
 sudo useradd -g csye6225 -d /opt/csye6225 -s /usr/sbin/nologin csye6225
 
 sudo yum install unzip
+
+sudo cp -r  webapp.zip /opt/csye6225
 
 sudo -u csye6225 bash
 
@@ -34,8 +39,9 @@ sudo -u csye6225 bash
 sudo chmod o+rx /opt/csye6225
 
 
-sudo cp -r  webapp2.zip /opt/csye6225
-
-
 cd /opt/csye6225
-sudo unzip webapp2.zip
+sudo unzip webapp.zip
+
+sudo npm install
+sudo npm uninstall bcrypt
+sudo npm install bcrypt
