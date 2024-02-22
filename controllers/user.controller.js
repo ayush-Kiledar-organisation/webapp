@@ -3,7 +3,7 @@ const router = express.Router();
 const {db} = require('../cred/cred');
 const basicAuth = require('../security/auth');
 const User = require('../cred/cred').Schema;
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const getUser = async (req, res) => {
 

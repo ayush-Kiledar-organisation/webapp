@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const User = require('../cred/cred').Schema;
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const authenticated = async (email, password) => {
 
