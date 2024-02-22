@@ -49,4 +49,3 @@ sudo yum remove nodejs
 sudo yum install -y nodejs gcc-c++ make
 sudo dnf module -y reset nodejs
 sudo dnf module -y enable nodejs:16
-
