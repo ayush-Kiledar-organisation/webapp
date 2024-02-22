@@ -1,0 +1,31 @@
+name: packer_Validate
+
+on: [pull_request]
+
+jobs:
+  packer-ci:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Create the zip file
+      run: zip -r webapp.zip ../webapp
+
+    - name: Install Packer
+      run: |
+        wget https://releases.hashicorp.com/packer/1.7.2/packer_1.7.2_linux_amd64.zip
+        unzip packer_1.7.2_linux_amd64.zip
+        chmod +x packer
+        mv packer /usr/local/bin
+      shell: bash
+
+    - name: packer init
+      run: packer init packer-file.json.pkr.hcl
+
+    - name: Packer fmt
+      run: packer fmt -check=true packer-file.json.pkr.hcl
+
+    - name: Packer Validate
+      run: packer build packer-file.json.pkr.hcl
