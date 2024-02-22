@@ -2,7 +2,9 @@
 
 sudo yum update
 
+
 echo "installing node and npm"
+
 sudo yum install -y nodejs gcc-c++ make
 sudo dnf module -y reset nodejs
 sudo dnf module -y enable nodejs:16
@@ -26,6 +28,7 @@ sudo useradd -g csye6225 -d /opt/csye6225 -s /usr/sbin/nologin csye6225
 sudo yum install unzip
 
 sudo cp -r  webapp.zip /opt/csye6225
+
 
 sudo -u csye6225 bash
 
