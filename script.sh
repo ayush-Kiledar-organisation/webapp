@@ -44,5 +44,9 @@ sudo chmod o+rx /opt/csye6225
 cd /opt/csye6225
 sudo unzip webapp.zip
 
-sudo npm install
+
+sudo yum remove nodejs
+sudo yum install -y nodejs gcc-c++ make
+sudo dnf module -y reset nodejs
+sudo dnf module -y enable nodejs:16
 
