@@ -11,4 +11,4 @@ ExecStart=/usr/bin/node /opt/csye6225/webapp/server.js
 Restart=always
 
 [Install]
-wantedby=multi-user.target
+WantedBy=multi-user.target
