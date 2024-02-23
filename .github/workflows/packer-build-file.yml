@@ -3,11 +3,6 @@ name: Packer Build
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
-  pull_request_target:
-    branches: -main
-  workflow_dispatch:
 
 jobs:
   packer_build:
