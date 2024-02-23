@@ -36,8 +36,8 @@ jobs:
 
       - name: Create the db and apply the same
         run: |
-          mysql -u${{secrets.MYSQL_USERNAME}} -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "CREATE DATABASE IF NOT EXISTS ${{secrets.MYSQL_DATABASENAME}};" -DskipTests
-          mysql -u${{ secrets.MYSQL_USERNAME}} -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "USE ${{secrets.MYSQL_DATABASENAME}};" -DskipTests
+          mysql -u${{secrets.MYSQL_USERNAME}} -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "CREATE DATABASE IF NOT EXISTS ${{secrets.MYSQL_DATABASENAME}};"
+          mysql -u${{ secrets.MYSQL_USERNAME}} -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "USE ${{secrets.MYSQL_DATABASENAME}};"
 
       - name: Run The Test
 
@@ -53,7 +53,7 @@ jobs:
 
       - name: Delete the db
         run: |
-          mysql -u${{secrets.MYSQL_USERNAME}} -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "DROP DATABASE ${{secrets.MYSQL_DATABASENAME}}" -DskipTests
+          mysql -u${{secrets.MYSQL_USERNAME}} -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "DROP DATABASE ${{secrets.MYSQL_DATABASENAME}}"
 
       - name: test for failure(optional)
         if: failure()
