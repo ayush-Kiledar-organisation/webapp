@@ -9,6 +9,7 @@ const credentials = new Sequelize(
 
     'root', 
     '',{
+
     host: '127.0.0.1',
 
     dialect: 'mysql',
