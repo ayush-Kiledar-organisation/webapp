@@ -2,6 +2,7 @@ const {Sequelize} = require('sequelize');
 require('dotenv').config();
 const User = require('../model/User');
 
+const password = ${{secrets.pass}} || '';
 
 const credentials = new Sequelize(
 
@@ -9,7 +10,7 @@ const credentials = new Sequelize(
     'cloud_assignment_db',
 
     'root', 
-    ${{secrets.pass}} || '',{
+    password,{
     host: '127.0.0.1',
 
     dialect: 'mysql',
