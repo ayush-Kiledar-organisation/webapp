@@ -49,7 +49,7 @@ jobs:
           PORT: 3000
 
         run: |
-          npm test -DskipTests
+          npm test
 
       - name: Delete the db
         run: |

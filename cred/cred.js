@@ -8,7 +8,7 @@ const credentials = new Sequelize(
     'cloud_assignment_db',
 
     'root', 
-    '',{
+    process.env.PASSWORD || '',{
 
     host: '127.0.0.1',
 
