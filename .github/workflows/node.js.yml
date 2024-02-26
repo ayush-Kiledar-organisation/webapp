@@ -34,10 +34,10 @@ jobs:
           sudo systemctl start mysql
           sudo systemctl status mysql
 
-      - name: Create the db and apply the same
-        run: |
-          mysql -u${{secrets.MYSQL_USERNAME}} -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "CREATE DATABASE IF NOT EXISTS ${{secrets.MYSQL_DATABASENAME}};"
-          mysql -u${{ secrets.MYSQL_USERNAME}} -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "USE ${{secrets.MYSQL_DATABASENAME}};"
+      # - name: Create the db and apply the same
+      #   run: |
+      #     mysql -u${{secrets.MYSQL_USERNAME}} -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "CREATE DATABASE IF NOT EXISTS ${{secrets.MYSQL_DATABASENAME}};"
+      #     mysql -u${{ secrets.MYSQL_USERNAME}} -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "USE ${{secrets.MYSQL_DATABASENAME}};"
 
       - name: Run The Test
 
