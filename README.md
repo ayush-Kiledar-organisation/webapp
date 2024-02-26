@@ -10,6 +10,7 @@
   <li>The API's are proteted with basic auth authentication token.</li>
   <li>It requires username and password</li>
 <li>Also added integration tests</li>
+  <li>Built machine images and VM instances</li>
 </ul>
 </ol>
 
