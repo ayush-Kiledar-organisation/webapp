@@ -64,7 +64,7 @@ beforeAll(async()=>{
   
           const resGetUser = await request(app).get("/v1/user/self").set("Authorization", `Basic ${newToken}`);
   
-          expect(resGetUser.statusCode).toBe(204);
+          expect(resGetUser.statusCode).toBe(200);
       });
   });  
 
