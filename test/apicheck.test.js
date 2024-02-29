@@ -58,7 +58,7 @@ beforeAll(async()=>{
           const token = Buffer.from(`${email}:${password}`).toString('base64');
           const resUpdateUser = await request(app).put("/v1/user/self").set("Authorization", `Basic ${token}`).send(user_obj);
           
-          await expect(resUpdateUser.statusCode).toBe(200);
+          await expect(resUpdateUser.statusCode).toBe(204);
   
           const newToken = Buffer.from(`${email}:${user_obj.password}`).toString('base64');
   
