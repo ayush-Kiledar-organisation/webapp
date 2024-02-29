@@ -42,11 +42,10 @@ jobs:
       - name: Run The Test
 
         env:
-          HOST: 127.0.0.1
-          HOSTNAME: root
-          PASSWORD: root
-          DATABASE: ${{secrets.MYSQL_DATABASENAME}}
-          PORT: 3000
+          host: 127.0.0.1
+          username: root
+          password: root
+          database: ${{secrets.MYSQL_DATABASENAME}}
 
         run: |
           npm test

@@ -2,18 +2,21 @@ const {Sequelize} = require('sequelize');
 require('dotenv').config();
 const User = require('../model/User');
 
+// const connector = new Connector();
+// const clientOpts = await connector.getOptions({
+//     instanceConnectionName: process.env.INSTANCE_CONNECTION_NAME,
+//     authType: 'IAM'
+// });
+
 const credentials = new Sequelize(
 
+    process.env.database,
+    process.env.username, 
+    process.env.password,{
 
-    'cloud_assignment_db',
-
-    'root', 
-    process.env.PASSWORD || '',{
-
-    host: '127.0.0.1',
-
-    dialect: 'mysql',
-    logging: false
+        host: process.env.host,
+        dialect: 'mysql',
+        logging: false
     });
 
 const Schema = credentials.define('user',User);
