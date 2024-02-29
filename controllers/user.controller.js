@@ -40,7 +40,7 @@ const createUser = async (req, res) => {
         const existing = await User.findOne({ where: { email: req.body.email } });
 
         if(existing){
-            res.status(409).json({ error: "Email already taken" });
+            res.status(400).json({ error: "Email already taken" });
             return;
         }
 
@@ -104,7 +104,7 @@ const updateUser = async (req, res) => {
         const existing = await User.findOne({ where: { email: emailid } });
 
         if(!existing){
-            res.status(409).json({ error: "User not found" });
+            res.status(400).json({ error: "User not found" });
             return;
         }
         if(req.body.password == ""){
@@ -148,7 +148,7 @@ const updateUser = async (req, res) => {
             updated_at: updated.account_updated
         }
     
-        res.status(200).json(obj);
+        res.status(204).json();
 
 }
 

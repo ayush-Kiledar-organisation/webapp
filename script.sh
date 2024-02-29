@@ -11,14 +11,6 @@ sudo dnf module -y enable nodejs:16
 
 sudo yum update
 
-echo "installing mysql and creating the db"
-sudo yum -y install @mysql
-sudo systemctl start mysqld.service
-sudo systemctl enable mysqld
-mysql -u root -p'' -e "CREATE DATABASE cloud_assignment_db;"
-
-sudo yum update
-
 sudo yum install unzip -y
 
 echo "add user and group"
