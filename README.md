@@ -13,13 +13,3 @@
   <li>Built machine images and VM instances</li>
 </ul>
 </ol>
-
-<li>New changes here</li>
-
-<li>changes again</li>
-
-
-<li>Changes</li>
-
-
-<li>Changes</li>
