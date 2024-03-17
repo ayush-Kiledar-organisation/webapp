@@ -12,7 +12,7 @@ source "googlecompute" "ass4_image" {
   source_image_family = "centos-stream-8"
   ssh_username        = "packer"
   zone                = "us-central1-a"
-  image_name          = "myimage2"
+  image_name          = "myimage3"
 }
 
 build {
@@ -32,6 +32,14 @@ build {
     provisioner "shell" {
     scripts = [
       "systemd.sh",
+    ]
+  }
+
+  # Installing Ops Agent
+  provisioner "shell" {
+    inline = [
+      "curl -sSO https://dl.google.com/cloudagents/add-google-cloud-ops-agent-repo.sh",
+      "sudo bash add-google-cloud-ops-agent-repo.sh --also-install"
     ]
   }
 

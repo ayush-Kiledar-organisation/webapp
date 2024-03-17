@@ -18,8 +18,21 @@
     "sequelize": "^6.37.0",
     "supertest": "^6.3.4"
   },
-  "description": "",
+  "description": "<ol>\r <li>The webapp is a backend application built using Javascript, Express.js as the primary technology.</li>\r <li>The ORM framework used here is the Sequalize, which thereby makes the calls to the MySql database.</li>\r <li>The following pre-requisites are required: </li> <br/>",
   "devDependencies": {
     "node-pre-gyp": "0.12.0"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ayush-neu23/webapp-fork.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ayush-neu23/webapp-fork/issues"
+  },
+  "homepage": "https://github.com/Ayush-neu23/webapp-fork#readme"
 }
