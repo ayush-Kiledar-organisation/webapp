@@ -128,5 +128,5 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-/webapp2.zip
+/webapp.zip
 /node_modules
