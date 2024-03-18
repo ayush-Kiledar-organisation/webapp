@@ -12,7 +12,7 @@ source "googlecompute" "ass4_image" {
   source_image_family = "centos-stream-8"
   ssh_username        = "packer"
   zone                = "us-central1-a"
-  image_name          = "myimage3"
+  image_name          = "myimage2"
 }
 
 build {
@@ -44,30 +44,15 @@ build {
   }
 
   provisioner "file" {
-    content = <<EOF
-  logging:
-  receivers:
-    webapp-receiver:
-      type: files
-      include_paths:
-        - /var/log/myapp.log
-      record_log_file_path: true
-  processors:
-    webapp-processor:
-      type: parse_json
-      time_key: time
-      time_format: "%Y-%m-%dT%H:%M:%S.%L%Z"
-  service:
-    pipelines:
-      default_pipeline:
-        receivers: [webapp-receiver]
-        processors: [webapp-processor]
-  EOF
-      destination = "/etc/google-cloud-ops-agent/config.yaml"
+      source      = "config.yaml"
+      destination = "~/config.yaml"
   }
 
   provisioner "shell" {
     inline = [
+      "sudo cp -r  config.yaml /etc/google-cloud-ops-agent",
+      "sudo touch /var/log/myapp.log",
+      "sudo chown csye6225:csye6225 /var/log/myapp.log",
       "sudo systemctl restart google-cloud-ops-agent"
     ]
   }
