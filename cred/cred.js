@@ -7,14 +7,14 @@ const User = require('../model/User');
 //     instanceConnectionName: process.env.INSTANCE_CONNECTION_NAME,
 //     authType: 'IAM'
 // });
-
+console.log(process.env.username);
 const credentials = new Sequelize(
 
-    process.env.database,
-    process.env.username, 
-    process.env.password,{
+    process.env.db_database,
+    process.env.db_username, 
+    process.env.db_password,{
 
-        host: process.env.host,
+        host: process.env.db_host,
         dialect: 'mysql',
         logging: false
     });

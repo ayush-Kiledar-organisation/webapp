@@ -1,13 +1,6 @@
 name: build.js
 
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-  pull_request_target:
-    branches: -main
-  workflow_dispatch:
+on: [pull_request]
 
 jobs:
   build:
@@ -42,10 +35,11 @@ jobs:
       - name: Run The Test
 
         env:
-          host: 127.0.0.1
-          username: root
-          password: root
-          database: ${{secrets.MYSQL_DATABASENAME}}
+          db_host: 127.0.0.1
+          db_username: root
+          db_password: root
+          db_database: ${{secrets.MYSQL_DATABASENAME}}
+          test: ci_testing
 
         run: |
           npm test
@@ -54,10 +48,5 @@ jobs:
         run: |
           mysql -u${{secrets.MYSQL_USERNAME}} -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "DROP DATABASE ${{secrets.MYSQL_DATABASENAME}}"
 
-      - name: test for failure(optional)
-        if: failure()
-        run: exit 1
-
       - name: All tests completed
-        if: ${{success()}}
         run: echo "Test succesfull."

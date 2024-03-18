@@ -35,4 +35,25 @@ build {
     ]
   }
 
+  # Installing Ops Agent
+  provisioner "shell" {
+    inline = [
+      "curl -sSO https://dl.google.com/cloudagents/add-google-cloud-ops-agent-repo.sh",
+      "sudo bash add-google-cloud-ops-agent-repo.sh --also-install"
+    ]
+  }
+
+  provisioner "file" {
+      source      = "config.yaml"
+      destination = "~/config.yaml"
+  }
+
+  provisioner "shell" {
+    inline = [
+      "sudo cp -r  config.yaml /etc/google-cloud-ops-agent",
+      "sudo touch /var/log/myapp.log",
+      "sudo chown csye6225:csye6225 /var/log/myapp.log",
+      "sudo systemctl restart google-cloud-ops-agent"
+    ]
+  }
 }

@@ -7,6 +7,7 @@ const bcrypt = require('bcryptjs');
 const basicAuth = require('./security/auth');
 const body_parser = require('body-parser');
 const router = require('./routes');
+const logger = require('./logger');
 
 app.use(body_parser.json());
 db.sequelize.sync();
@@ -14,7 +15,7 @@ db.sequelize.sync();
 app.use(router)
 
 app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+    logger.info('Server is running on port 3000');
 })
 
 module.exports = app;
