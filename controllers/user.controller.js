@@ -4,14 +4,19 @@ const {db} = require('../cred/cred');
 const basicAuth = require('../security/auth');
 const User = require('../cred/cred').Schema;
 const bcrypt = require('bcryptjs');
+const Logger = require('node-json-logger');
+
+const logger = new Logger();
 
 const getUser = async (req, res) => {
 
-    const email = Buffer.from(req.get('Authorization').split(' ')[1], 'base64').toString().split(':')[0];
+    try{
+        const email = Buffer.from(req.get('Authorization').split(' ')[1], 'base64').toString().split(':')[0];
 
     const user = await User.findOne({ where: { email } });
 
     if(!user){
+        logger.warn('No User of this email found')
         res.status(404).json({ error: "No User of this email found" });
     }
 
@@ -24,90 +29,110 @@ const getUser = async (req, res) => {
         updated_at: user.account_updated
     }
 
+    logger.info('User details fetched successfully')
     res.status(200).json(obj);
+    }
+    catch(e){
+        logger.trace(e);
+    }
 
 
 }
 
 const createUser = async (req, res) => {
-    console.log(req.body);
 
-    if(!req.body.email || req.body.email == "") {
-        res.status(400).json({ error: "Email is required" });
-        return;
+    try{
+
+        if(!req.body.email || req.body.email == "") {
+            logger.warn('Email is required')
+            res.status(400).json({ error: "Email is required" });
+            return;
+        }
+    
+            const existing = await User.findOne({ where: { email: req.body.email } });
+    
+            if(existing){
+                logger.fatal('Email already taken')
+                res.status(400).json({ error: "Email already taken" });
+                return;
+            }
+    
+            if(!req.body.password || req.body.password == ""){
+                logger.error("Password field shouldn't be empty")
+                res.status(400).json({ error: "Password field shouldn't be empty" });
+                return;
+            }
+    
+            if(!req.body.firstName || req.body.firstName == "") {
+                logger.warn('FirstName is required')
+                res.status(400).json({ error: "FirstName is required" });
+                return;
+            }
+    
+            if(!req.body.lastName || req.body.lastName == "") {
+                logger.warn('Lastname is required')
+                res.status(400).json({ error: "LastName is required" });
+                return;
+            }
+    
+            if(req.body.created_at || req.body.updated_at || req.body.id){
+                logger.fatal("Auto generated fields must not be manipulated")
+                res.status(400).json({ error: "Auto generated fields must not be manipulated" });
+                return;
+            }
+    
+    
+    
+            const hashedPassword = await bcrypt.hash(req.body.password, 8);
+    
+            const newuser = {
+                email: req.body.email,
+                password: hashedPassword,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                created_at: new Date(),
+                updated_at: new Date()
+            }
+        
+        
+            const user = await User.create(newuser);
+    
+            console.log(user);
+    
+            const obj = {
+                id: user.id,
+                email: user.email,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                created_at: user.account_created,
+                updated_at: user.account_updated
+            }
+            logger.info('User registered successfully')
+            res.status(201).json(obj); 
+
     }
-
-        const existing = await User.findOne({ where: { email: req.body.email } });
-
-        if(existing){
-            res.status(400).json({ error: "Email already taken" });
-            return;
-        }
-
-        if(!req.body.password || req.body.password == ""){
-            res.status(400).json({ error: "Password field shouldn't be empty" });
-            return;
-        }
-
-        if(!req.body.firstName || req.body.firstName == "") {
-            res.status(400).json({ error: "FirstName is required" });
-            return;
-        }
-
-        if(!req.body.lastName || req.body.lastName == "") {
-            res.status(400).json({ error: "LastName is required" });
-            return;
-        }
-
-        if(req.body.created_at || req.body.updated_at || req.body.id){
-
-            res.status(400).json({ error: "Auto generated fields must not be manipulated" });
-            return;
-        }
-
-
-
-        const hashedPassword = await bcrypt.hash(req.body.password, 8);
-
-        const newuser = {
-            email: req.body.email,
-            password: hashedPassword,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            created_at: new Date(),
-            updated_at: new Date()
-        }
-    
-    
-        const user = await User.create(newuser);
-
-        console.log(user);
-
-        const obj = {
-            id: user.id,
-            email: user.email,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            created_at: user.account_created,
-            updated_at: user.account_updated
-        }
-    
-        res.status(201).json(obj); 
+    catch(e){
+        logger.trace(e);
+    }
 
 }
 
 const updateUser = async (req, res) => {
-    // console.log(req.body);
+    
+    try{
+        // console.log(req.body);
 
         const emailid = Buffer.from(req.get('Authorization').split(' ')[1], 'base64').toString().split(':')[0];
 
         const existing = await User.findOne({ where: { email: emailid } });
 
         if(!existing){
+            logger.debug('User not found')
             res.status(400).json({ error: "User not found" });
             return;
         }
         if(req.body.password == ""){
+            logger.debug("Password field shouldn't be empty")
             res.status(400).json({ error: "Password field shouldn't be empty" });
             return;
         }
@@ -115,12 +140,13 @@ const updateUser = async (req, res) => {
         if(req.body.password){hashedPassword = await bcrypt.hash(req.body.password, 8);}
 
         if(req.body.email) {
+            logger.fatal('Email not required')
             res.status(400).json({ error: "Email not required" });
             return;
         }
 
         if(req.body.created_at || req.body.updated_at || req.body.id){
-
+            logger.fatal("Auto generated fields must not be manipulated")
             res.status(400).json({ error: "Auto generated fields must not be manipulated" });
             return;
         }
@@ -147,8 +173,12 @@ const updateUser = async (req, res) => {
             created_at: updated.account_created,
             updated_at: updated.account_updated
         }
-    
+        logger.info('User updated successfully')
         res.status(204).json();
+    }
+    catch(e){
+        logger.trace(e);
+    }
 
 }
 
