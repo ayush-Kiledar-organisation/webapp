@@ -14,4 +14,4 @@
 </ul>
 </ol>
 
-<li>New changes here</li>
+<li>Changes here</li>
