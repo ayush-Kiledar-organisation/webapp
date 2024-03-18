@@ -4,9 +4,7 @@ const {db} = require('../cred/cred');
 const basicAuth = require('../security/auth');
 const User = require('../cred/cred').Schema;
 const bcrypt = require('bcryptjs');
-const Logger = require('node-json-logger');
-
-const logger = new Logger();
+const logger = require('../logger');
 
 const getUser = async (req, res) => {
 

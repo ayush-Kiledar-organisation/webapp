@@ -1,8 +1,5 @@
 const {credentials} = require('../cred/cred');
-const Logger = require('node-json-logger');
-
-const logger = new Logger();
-
+const logger = require('../logger');
 const healthzController = async(req, res) => {
 
     res.setHeader('Cache-Control', 'no-cache');
