@@ -15,3 +15,4 @@
 </ol>
 
 <li>Ops Agent Working</li>
+<li>Logs are displayed in explorer</li>
