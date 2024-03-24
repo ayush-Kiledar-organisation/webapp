@@ -19,6 +19,12 @@ const getUser = async (req, res) => {
         res.status(404).json({ error: "No User of this email found" });
     }
 
+    if(!process.env.test && !user.email_verified){
+        logger.warn('Email not verified')
+        res.status(400).json({ error: "Email not verified" });
+        return;
+    }
+
     const obj = {
         id: user.id,
         email: user.email,
@@ -103,7 +109,8 @@ const createUser = async (req, res) => {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 created_at: user.account_created,
-                updated_at: user.account_updated
+                updated_at: user.account_updated,
+                email_verified: false
             }
             logger.info('User registered successfully')
 
@@ -113,7 +120,8 @@ const createUser = async (req, res) => {
 
             const payload = {
                 email: user.email,
-                id: user.id
+                id: user.id,
+                time: new Date()
             }
 
             const data = JSON.stringify(payload)
@@ -163,13 +171,20 @@ const updateUser = async (req, res) => {
             return;
         }
 
+        if(!process.env.test && !user.email_verified){
+            logger.warn('Email not verified')
+            res.status(400).json({ error: "Email not verified" });
+            return;
+        }
+
         const newuser = {
             email: existing.email,
             password: req.body.password ? hashedPassword: existing.password,
             firstName: req.body.firstName ? req.body.firstName: existing.firstName,
             lastName: req.body.lastName ? req.body.lastName: existing.lastName,
             created_at: existing.created_at,
-            updated_at: new Date()
+            updated_at: new Date(),
+            email_verified: true
         }
     
     

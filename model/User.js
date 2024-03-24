@@ -25,6 +25,10 @@ const User = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      email_verified: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
       account_created: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
