@@ -5,6 +5,7 @@ const basicAuth = require('../security/auth');
 const User = require('../cred/cred').Schema;
 const bcrypt = require('bcryptjs');
 const logger = require('../logger');
+const {PubSub} = require('@google-cloud/pubsub');
 
 const getUser = async (req, res) => {
 
@@ -105,7 +106,21 @@ const createUser = async (req, res) => {
                 updated_at: user.account_updated
             }
             logger.info('User registered successfully')
+
+            var topicName = 'verify_email';
+            var subname = 'cloud-sub';
+            var projectId = 'dev-assignment4'
+
+            const payload = {
+                email: user.email,
+                id: user.id
+            }
+
+            const data = JSON.stringify(payload)
+            const pubsub = new PubSub({projectId});
+
             res.status(201).json(obj); 
+            pubsub.topic(topicName).publishMessage({data: Buffer.from(data)});
 
     }
     catch(e){
