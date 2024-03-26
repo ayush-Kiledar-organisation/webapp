@@ -120,8 +120,7 @@ const createUser = async (req, res) => {
 
             const payload = {
                 email: user.email,
-                id: user.id,
-                time: new Date()
+                id: user.id
             }
 
             const data = JSON.stringify(payload)

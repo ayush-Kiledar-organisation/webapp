@@ -4,12 +4,12 @@ var topicName = 'verify_email';
 var subname = 'cloud-sub';
 projectId = 'dev-assignment4'
 
-const pubsubFunc = (payload) => {
+const pubsubFunc = () => {
 
   const pubsub = new PubSub({projectId});
 
-  const data = JSON.stringify(payload)
-  pubsub.topic(topicName).publishMessage({data: Buffer.from(data)});
+  // const data = JSON.stringify(payload)
+  pubsub.topic(topicName).publishMessage({data: Buffer.from("Hello pubsub")});
 }
 
-module.exports = pubsubFunc;
+pubsubFunc();
