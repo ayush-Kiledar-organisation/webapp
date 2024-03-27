@@ -12,7 +12,7 @@ source "googlecompute" "ass4_image" {
   source_image_family = "centos-stream-8"
   ssh_username        = "packer"
   zone                = "us-central1-a"
-  image_name          = "myimage2"
+  image_name          = "myimage3"
 }
 
 build {

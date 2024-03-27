@@ -129,6 +129,8 @@ const createUser = async (req, res) => {
             res.status(201).json(obj); 
             pubsub.topic(topicName).publishMessage({data: Buffer.from(data)});
 
+            
+
     }
     catch(e){
         logger.trace(e);
