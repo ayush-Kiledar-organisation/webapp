@@ -19,7 +19,7 @@ const getUser = async (req, res) => {
         res.status(404).json({ error: "No User of this email found" });
     }
 
-    if(!process.env.test && !user.email_verified){
+    if(process.env.test !== 'ci_testing' && !user.email_verified){
         logger.warn('Email not verified')
         res.status(400).json({ error: "Email not verified" });
         return;
@@ -124,14 +124,13 @@ const createUser = async (req, res) => {
             }
 
             const data = JSON.stringify(payload)
-
+            
             if(!process.env.test){
                 const pubsub = new PubSub({projectId});
                 pubsub.topic(topicName).publishMessage({data: Buffer.from(data)});
             }
-
             res.status(201).json(obj); 
-            // pubsub.topic(topicName).publishMessage({data: Buffer.from(data)});
+            
 
             
 
@@ -176,7 +175,7 @@ const updateUser = async (req, res) => {
             return;
         }
 
-        if(!process.env.test && !user.email_verified){
+        if(process.env.test !== 'ci_testing' && !user.email_verified){
             logger.warn('Email not verified')
             res.status(400).json({ error: "Email not verified" });
             return;
