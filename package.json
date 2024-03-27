@@ -8,16 +8,20 @@
   },
   "dependencies": {
     "@google-cloud/cloud-sql-connector": "^1.2.3",
+    "@google-cloud/pubsub": "^4.3.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "dotenv": "^16.4.4",
     "express": "^4.18.2",
+    "form-data": "^4.0.0",
     "jest": "^29.7.0",
+    "mailgun.js": "^10.2.1",
     "mysql2": "^3.9.1",
     "node-json-logger": "^0.2.1",
     "pg": "^8.11.3",
     "sequelize": "^6.37.0",
-    "supertest": "^6.3.4"
+    "supertest": "^6.3.4",
+    "url": "^0.11.3"
   },
   "description": "<ol>\r <li>The webapp is a backend application built using Javascript, Express.js as the primary technology.</li>\r <li>The ORM framework used here is the Sequalize, which thereby makes the calls to the MySql database.</li>\r <li>The following pre-requisites are required: </li> <br/>",
   "devDependencies": {

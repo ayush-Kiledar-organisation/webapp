@@ -5,6 +5,7 @@ const basicAuth = require('../security/auth');
 const User = require('../cred/cred').Schema;
 const bcrypt = require('bcryptjs');
 const logger = require('../logger');
+const {PubSub} = require('@google-cloud/pubsub');
 
 const getUser = async (req, res) => {
 
@@ -16,6 +17,12 @@ const getUser = async (req, res) => {
     if(!user){
         logger.warn('No User of this email found')
         res.status(404).json({ error: "No User of this email found" });
+    }
+
+    if(!process.env.test && !user.email_verified){
+        logger.warn('Email not verified')
+        res.status(400).json({ error: "Email not verified" });
+        return;
     }
 
     const obj = {
@@ -102,10 +109,31 @@ const createUser = async (req, res) => {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 created_at: user.account_created,
-                updated_at: user.account_updated
+                updated_at: user.account_updated,
+                email_verified: false
             }
             logger.info('User registered successfully')
+
+            var topicName = 'verify_email';
+            var subname = 'cloud-sub';
+            var projectId = 'dev-assignment4'
+
+            const payload = {
+                email: user.email,
+                id: user.id
+            }
+
+            const data = JSON.stringify(payload)
+
+            if(!process.env.test){
+                const pubsub = new PubSub({projectId});
+                pubsub.topic(topicName).publishMessage({data: Buffer.from(data)});
+            }
+
             res.status(201).json(obj); 
+            // pubsub.topic(topicName).publishMessage({data: Buffer.from(data)});
+
+            
 
     }
     catch(e){
@@ -148,13 +176,20 @@ const updateUser = async (req, res) => {
             return;
         }
 
+        if(!process.env.test && !user.email_verified){
+            logger.warn('Email not verified')
+            res.status(400).json({ error: "Email not verified" });
+            return;
+        }
+
         const newuser = {
             email: existing.email,
             password: req.body.password ? hashedPassword: existing.password,
             firstName: req.body.firstName ? req.body.firstName: existing.firstName,
             lastName: req.body.lastName ? req.body.lastName: existing.lastName,
             created_at: existing.created_at,
-            updated_at: new Date()
+            updated_at: new Date(),
+            email_verified: true
         }
     
     

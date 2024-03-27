@@ -9,6 +9,11 @@ const routes = [
     {
         "path":"",
         "route": require('./user.route')
+    },
+    {
+        "path":"",
+        "route": require('./verify.route')
+    
     }
 ]
 

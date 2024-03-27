@@ -14,5 +14,6 @@
 </ul>
 </ol>
 
+<li>New changes here</li>
 <li>Ops Agent Working</li>
-<li>Logs are displayed in explorer</li>
+
