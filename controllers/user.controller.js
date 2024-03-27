@@ -124,10 +124,14 @@ const createUser = async (req, res) => {
             }
 
             const data = JSON.stringify(payload)
-            const pubsub = new PubSub({projectId});
+
+            if(!process.env.test){
+                const pubsub = new PubSub({projectId});
+                pubsub.topic(topicName).publishMessage({data: Buffer.from(data)});
+            }
 
             res.status(201).json(obj); 
-            pubsub.topic(topicName).publishMessage({data: Buffer.from(data)});
+            // pubsub.topic(topicName).publishMessage({data: Buffer.from(data)});
 
             
 
