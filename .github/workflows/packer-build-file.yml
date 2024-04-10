@@ -1,10 +1,8 @@
 name: Packer Build
 
-# on:
-#   push:
-#     branches: [main]
-
-on: [pull_request]
+on:
+  push:
+    branches: [main]
 
 jobs:
   packer_build:
@@ -54,7 +52,7 @@ jobs:
       id: packer_build
       run: |
         echo "Running packer build"
-        # packer build packer-file.json.pkr.hcl
+        packer build packer-file.json.pkr.hcl
 
     - name: Create new Instance Template
       run: |
