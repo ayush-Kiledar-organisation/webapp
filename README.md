@@ -14,5 +14,5 @@
 </ul>
 </ol>
 
-<li>New changes here</li>
-<li>Ops Agent Working</li>
+<li>The CI/CD pipeline has been set up. </li>
+<li>Verification mail is sent with event driven architecture</li>
