@@ -21,7 +21,7 @@ const getUser = async (req, res) => {
 
     if(process.env.test !== 'ci_testing' && !user.email_verified){
         logger.warn('Email not verified')
-        res.status(400).json({ error: "Email not verified" });
+        res.status(403).json({ error: "Email not verified" });
         return;
     }
 
@@ -175,11 +175,11 @@ const updateUser = async (req, res) => {
             return;
         }
 
-            // if(process.env.test !== 'ci_testing' && !user.email_verified){
-            //     logger.warn('Email not verified')
-            //     res.status(400).json({ error: "Email not verified" });
-            //     return;
-            // }
+        if(process.env.test !== 'ci_testing' && !existing.email_verified){
+            logger.warn('Email not verified')
+            res.status(403).json({ error: "Email not verified" });
+            return;
+        }
 
         const newuser = {
             email: existing.email,
