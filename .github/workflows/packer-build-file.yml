@@ -52,7 +52,7 @@ jobs:
       id: packer_build
       run: |
         echo "Running packer build"
-        # packer build packer-file.json.pkr.hcl
+        packer build packer-file.json.pkr.hcl
     - name: Create new Instance Template
       run: |
         IMAGE_ID=$(gcloud compute images list --project=dev-assignment4 --format="value(NAME)" --sort-by="creationTimeStamp" --filter="name~myimage" --limit=1)
