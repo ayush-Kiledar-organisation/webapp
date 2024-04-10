@@ -52,7 +52,7 @@ jobs:
       id: packer_build
       run: |
         echo "Running packer build"
-        packer build packer-file.json.pkr.hcl
+        # packer build packer-file.json.pkr.hcl
 
     - name: Create new Instance Template
       run: |
