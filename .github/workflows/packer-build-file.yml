@@ -65,11 +65,12 @@ jobs:
     
     - name: Configure the managed instance group
       run: |
-        gcloud compute instance-groups managed set-instance-template webappserver-igm --project=dev-assignment4 --template=projects/dev-assignment4/regions/us-central1/instanceTemplates/${{secrets.INSTANCE_TEMPLATE_NAME}} --region=us-central1
+        TEMPLATE_NAME=$(date+%s)
+        gcloud compute instance-groups managed set-instance-template webappserver-igm --project=dev-assignment4 --template=projects/dev-assignment4/regions/us-central1/instanceTemplates/$TEMPLATE_NAME --region=us-central1
     
     - name: Update the managed Instance Group
       run: |
-        gcloud compute instance-groups managed rolling-action start-update webappserver-igm --project=dev-assignment4 --region=us-central1 --version=template=projects/dev-assignment4/regions/us-central1/instanceTemplates/${{secrets.INSTANCE_TEMPLATE_NAME}} --type=proactive
+        gcloud compute instance-groups managed rolling-action start-update webappserver-igm --project=dev-assignment4 --region=us-central1 --version=template=projects/dev-assignment4/regions/us-central1/instanceTemplates/$TEMPLATE_NAME --type=proactive
 
     - name: Wait for the group update to finish
       run: |
