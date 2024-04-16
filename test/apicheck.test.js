@@ -29,14 +29,14 @@ beforeAll(async()=>{
         "lastName": "Lname",
         "password": "Testing@234",
        };
-       const resCreateUser = await request(app).post("/v1/user/self").send(user_obj);
+       const resCreateUser = await request(app).post("/v10/user/self").send(user_obj);
   
        await expect(resCreateUser.statusCode).toBe(201);
        console.log("Create status=> ",resCreateUser.statusCode)
   
        const token = Buffer.from(`${user_obj.email}:${user_obj.password}`).toString('base64');
   
-        const resGetUser = await request(app).get("/v1/user/self").set("Authorization", `Basic ${token}`);
+        const resGetUser = await request(app).get("/v10/user/self").set("Authorization", `Basic ${token}`);
         console.log("Get status1 => ",resGetUser.statusCode)
   
         expect (resGetUser.statusCode).toBe(200);
@@ -56,13 +56,13 @@ beforeAll(async()=>{
           const password ='Testing@234';
   
           const token = Buffer.from(`${email}:${password}`).toString('base64');
-          const resUpdateUser = await request(app).put("/v1/user/self").set("Authorization", `Basic ${token}`).send(user_obj);
+          const resUpdateUser = await request(app).put("/v10/user/self").set("Authorization", `Basic ${token}`).send(user_obj);
           
           await expect(resUpdateUser.statusCode).toBe(204);
   
           const newToken = Buffer.from(`${email}:${user_obj.password}`).toString('base64');
   
-          const resGetUser = await request(app).get("/v1/user/self").set("Authorization", `Basic ${newToken}`);
+          const resGetUser = await request(app).get("/v10/user/self").set("Authorization", `Basic ${newToken}`);
   
           expect(resGetUser.statusCode).toBe(200);
       });
