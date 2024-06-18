@@ -14,5 +14,6 @@
 </ul>
 </ol>
 
-<li>The CI/CD pipeline has been set up. </li>
+<li>The CI/CD pipeline has been set up, using GitHub Actions, which allows code merge upon passing integration test workflow (CI) and runs the Packer Image Build workflow most merge(CD) </li>
+<li> The GCP Ops Agent is integrated and node-json logger is used for logging and monitoring</li>
 <li>Verification mail is sent with event driven architecture</li>
